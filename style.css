@@ -36,7 +36,7 @@ body.main-page {
 
 .stamp-cell {
     width: 100%;
-    padding-top: 100%; /* アスペクト比を1:1に設定 */
+    padding-top: 100%;
     position: relative;
     border-radius: 8px;
     background-color: #e6ffe6; /* 薄い黄緑 */
@@ -48,13 +48,15 @@ body.main-page {
     font-weight: bold;
     color: #4CAF50; /* 濃い緑 */
     box-sizing: border-box;
-    transition: background-color 0.3s ease;
 }
 
 .stamp-cell.stamped {
     background-color: #4CAF50; /* 濃い黄緑 */
     border-color: #2e7d32;
-    color: white;
+    background-image: url('img/dumbbell.svg'); /* 筋トレマーク */
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .stamp-cell.achieved {
@@ -62,6 +64,10 @@ body.main-page {
     border-color: #FF8F00;
     color: white;
     box-shadow: 0 0 10px #FFC107;
+}
+/* 達成スタンプには筋トレマークを表示しない */
+.stamp-cell.achieved.stamped {
+    background-image: none;
 }
 
 .stamp-number {
@@ -78,6 +84,7 @@ body.main-page {
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 1.5em;
+    text-align: center; /* ご褒美名を中央に */
 }
 
 .controls {
@@ -98,12 +105,4 @@ body.main-page {
 
 #add-point-btn:hover {
     background-color: #388E3C;
-}
-
-/* ご褒美の文字を中央に配置するためのスタイル */
-.stamp-cell.achieved .stamp-number {
-    display: none;
-}
-.stamp-cell.achieved .stamp-label {
-    font-size: 1.2em;
 }

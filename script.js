@@ -20,7 +20,12 @@ const stampGrid = document.getElementById('stamp-grid');
 if (stampGrid) {
     let points = 0;
     const TOTAL_STAMPS = 30;
-    const REWARD_STAMPS = [7, 15, 30]; // ご褒美マスのポイント
+    // ご褒美のマスと内容をオブジェクトの配列で管理
+    const REWARDS = [
+        { stamp: 7, name: 'カフェで休憩' },
+        { stamp: 15, name: '映画を見る' },
+        { stamp: 30, name: '新しい服' }
+    ];
 
     // ページの初期化
     function initializeStamps() {
@@ -34,12 +39,12 @@ if (stampGrid) {
             numberSpan.textContent = i;
             cell.appendChild(numberSpan);
 
-            // ご褒美マスに特別なクラスを付与
-            if (REWARD_STAMPS.includes(i)) {
+            const reward = REWARDS.find(r => r.stamp === i);
+            if (reward) {
                 cell.classList.add('reward-stamp');
                 const label = document.createElement('span');
                 label.classList.add('stamp-label');
-                label.textContent = 'ご褒美';
+                label.textContent = reward.name;
                 cell.appendChild(label);
             }
 
@@ -67,7 +72,9 @@ if (stampGrid) {
             const cell = document.getElementById(`stamp-cell-${i}`);
             if (i <= points) {
                 cell.classList.add('stamped');
-                if (REWARD_STAMPS.includes(i)) {
+                // ご褒美マスかどうかの確認
+                const isRewardStamp = REWARDS.some(r => r.stamp === i);
+                if (isRewardStamp) {
                     cell.classList.add('achieved');
                 }
             } else {
