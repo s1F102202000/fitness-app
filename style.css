@@ -110,6 +110,9 @@ body.main-page {
 .controls {
     margin-top: 20px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* ボタン間の間隔 */
 }
 
 #add-point-btn {
@@ -127,6 +130,21 @@ body.main-page {
     background-color: #388E3C;
 }
 
+/* スタンプ初期化ボタンのスタイル */
+#reset-btn {
+    padding: 12px 24px;
+    font-size: 14px;
+    background-color: #f4f4f9;
+    color: #888;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#reset-btn:hover {
+    background-color: #e0e0e0;
+}
 
 /* タップメッセージの点滅アニメーション */
 @keyframes blink {
