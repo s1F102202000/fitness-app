@@ -1,3 +1,23 @@
+/* style.css の .title-page スタイルを以下のように変更 */
+
+.title-page {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('img/background.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    cursor: pointer;
+    flex-direction: column;
+    /* 新しいグラデーションオーバーレイを追加 */
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('img/background.jpg');
+    background-size: cover;
+    background-position: center;
+}
 /* --- メインページ用のスタイル --- */
 body.main-page {
     background-image: url('img/background.jpg'); /* 背景画像 */
@@ -105,4 +125,15 @@ body.main-page {
 
 #add-point-btn:hover {
     background-color: #388E3C;
+}
+
+
+/* タップメッセージの点滅アニメーション */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+}
+
+.tap-message {
+    animation: blink 1.5s infinite;
 }
