@@ -65,7 +65,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('img/background.jpg'); /* 用意した画像パス */
+    background-image: url('C:\Users\iniad\Documents\Kanon\fitness-app\fitness-app\img\background.jpg'); /* 用意した画像パス */
     background-size: cover; /* 画面全体に画像を広げる */
     background-position: center;
     color: white; /* 文字色を白に */
