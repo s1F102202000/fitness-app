@@ -35,7 +35,7 @@ body.main-page {
 }
 
 .header {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(140, 204, 97, 0.8);
     padding: 15px 30px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -67,7 +67,7 @@ body.main-page {
     align-items: center;
     font-size: 1.2em;
     font-weight: bold;
-    color: #4CAF50; /* 濃い緑 */
+    color: #000000; /* 濃い緑 */
     box-sizing: border-box;
     transition: background-color 0.3s ease;
 }
