@@ -16,15 +16,15 @@ if (titleScreen) {
 const pointDisplay = document.getElementById('point-display');
 const addButton = document.getElementById('add-point-btn');
 const stampGrid = document.getElementById('stamp-grid');
-const resetButton = document.getElementById('reset-btn'); // 新しいボタンの取得
+const resetButton = document.getElementById('reset-btn');
 
 if (stampGrid) {
     let points = 0;
     const TOTAL_STAMPS = 30;
     const REWARDS = [
-        { stamp: 7, name: '1ガチャガチャ!' },
-        { stamp: 15, name: '1ガチャガチャ&アイス!' },
-        { stamp: 30, name: '焼肉!!' }
+        { stamp: 7, name: 'カフェで休憩' },
+        { stamp: 15, name: '映画を見る' },
+        { stamp: 30, name: '新しい服' }
     ];
 
     function initializeStamps() {
@@ -66,14 +66,19 @@ if (stampGrid) {
         pointDisplay.textContent = points;
         for (let i = 1; i <= TOTAL_STAMPS; i++) {
             const cell = document.getElementById(`stamp-cell-${i}`);
-            if (i <= points) {
-                cell.classList.add('stamped');
-                const isRewardStamp = REWARDS.some(r => r.stamp === i);
-                if (isRewardStamp) {
-                    cell.classList.add('achieved');
+            if (cell) { // nullチェックを追加
+                if (i <= points) {
+                    cell.classList.add('stamped');
+                } else {
+                    cell.classList.remove('stamped');
                 }
-            } else {
-                cell.classList.remove('stamped', 'achieved');
+
+                const isRewardStamp = REWARDS.some(r => r.stamp === i);
+                if (isRewardStamp && i <= points) {
+                    cell.classList.add('achieved');
+                } else {
+                    cell.classList.remove('achieved');
+                }
             }
         }
     }
@@ -81,12 +86,11 @@ if (stampGrid) {
     // スタンプ初期化ボタンクリック時の処理
     if (resetButton) {
         resetButton.addEventListener('click', () => {
-            // 確認ダイアログを表示
             const confirmReset = window.confirm('本当にスタンプを初期化しますか？この操作は元に戻せません。');
             if (confirmReset) {
-                points = 0; // ポイントを0にリセット
-                savePoints(); // ローカルストレージに保存
-                updateUI(); // 画面を更新
+                points = 0;
+                savePoints();
+                updateUI();
                 alert('スタンプを初期化しました。');
             }
         });
@@ -101,7 +105,6 @@ if (stampGrid) {
         }
     });
 
-    // ページ読み込み時に実行
     initializeStamps();
     loadPoints();
     updateUI();
