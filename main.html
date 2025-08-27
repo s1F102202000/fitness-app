@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フィットネスアプリ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>フィットネスポイント</h1>
+    <p>現在のポイント: <span id="point-display">0</span> P</p>
+
+    <div class="reward-section">
+        <h2>ご褒美リスト</h2>
+        <div class="reward-item" id="reward-1">
+            <p>カフェで休憩 (5P)</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-1"></div>
+            </div>
+            <p class="progress-text" id="progress-text-1">0 / 5 P</p>
+        </div>
+        <div class="reward-item" id="reward-2">
+            <p>映画を見る (10P)</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-2"></div>
+            </div>
+            <p class="progress-text" id="progress-text-2">0 / 10 P</p>
+        </div>
+        <div class="reward-item" id="reward-3">
+            <p>新しい服 (25P)</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-3"></div>
+            </div>
+            <p class="progress-text" id="progress-text-3">0 / 25 P</p>
+        </div>
+    </div>
+
+    <button id="add-point-btn">筋トレした！</button>
+
+    <script src="script.js"></script> </body>
+</html>

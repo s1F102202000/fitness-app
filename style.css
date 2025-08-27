@@ -1,3 +1,4 @@
+/* 既存のbodyスタイルは残しつつ、タイトルページ用のスタイルを追加 */
 body {
     font-family: sans-serif;
     text-align: center;
@@ -56,3 +57,47 @@ h1 {
 #add-point-btn:hover {
     background-color: #6a6ad4;
 }
+
+/* --- タイトル画面用のスタイルここから --- */
+.title-page {
+    margin: 0;
+    height: 100vh; /* 画面全体の高さに */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('img/background.jpg'); /* 用意した画像パス */
+    background-size: cover; /* 画面全体に画像を広げる */
+    background-position: center;
+    color: white; /* 文字色を白に */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* 文字に影をつけて読みやすく */
+    cursor: pointer; /* タップ可能であることを示すカーソル */
+    flex-direction: column; /* 縦方向に要素を並べる */
+}
+
+.title-container {
+    text-align: center;
+}
+
+.date-text {
+    font-size: 1.5em; /* 日付のサイズ */
+    margin-bottom: 10px;
+}
+
+.fitness-title {
+    font-size: 4em; /* FITNESSの文字サイズ */
+    margin: 0;
+    letter-spacing: 5px; /* 文字間隔 */
+}
+
+.tap-message {
+    font-size: 1.2em;
+    margin-top: 30px;
+    animation: blink 1.5s infinite; /* 点滅アニメーション */
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+/* --- タイトル画面用のスタイルここまで --- */
