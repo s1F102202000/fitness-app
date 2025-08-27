@@ -1,103 +1,109 @@
-/* 既存のbodyスタイルは残しつつ、タイトルページ用のスタイルを追加 */
-body {
-    font-family: sans-serif;
-    text-align: center;
-    margin: 50px 20px;
-    background-color: #f4f4f9;
+/* --- メインページ用のスタイル --- */
+body.main-page {
+    background-image: url('img/background.jpg'); /* 背景画像 */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* 画面に背景を固定 */
     color: #333;
-}
-h1 {
-    color: #4a4a8a;
-}
-.reward-section {
-    max-width: 500px;
-    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
     padding: 20px;
-    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.header {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
-.reward-item {
-    margin-bottom: 25px;
-}
-.progress-bar {
+
+.stamp-rally-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+    max-width: 500px;
     width: 100%;
-    height: 20px;
-    background-color: #e0e0e0;
-    border-radius: 10px;
-    overflow: hidden;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-.progress-fill {
-    height: 100%;
-    background-color: #76c7c0;
-    width: 0%;
-    transition: width 0.5s ease-in-out;
+
+.stamp-cell {
+    width: 100%;
+    padding-top: 100%; /* アスペクト比を1:1に設定 */
+    position: relative;
+    border-radius: 8px;
+    background-color: #e6ffe6; /* 薄い黄緑 */
+    border: 2px solid #a6e3a6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #4CAF50; /* 濃い緑 */
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
 }
-.progress-text {
-    font-size: 14px;
+
+.stamp-cell.stamped {
+    background-color: #4CAF50; /* 濃い黄緑 */
+    border-color: #2e7d32;
+    color: white;
+}
+
+.stamp-cell.achieved {
+    background-color: #FFC107; /* ご褒美マスは金色に */
+    border-color: #FF8F00;
+    color: white;
+    box-shadow: 0 0 10px #FFC107;
+}
+
+.stamp-number {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 0.8em;
     color: #666;
-    margin-top: 5px;
 }
-.reward-item.achieved {
-    background-color: #d1ffd6;
-    border: 2px solid #4caf50;
-    border-radius: 10px;
-    padding: 10px;
+
+.stamp-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
 }
+
+.controls {
+    margin-top: 20px;
+    text-align: center;
+}
+
 #add-point-btn {
     padding: 12px 24px;
     font-size: 18px;
-    background-color: #4a4a8a;
+    background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 #add-point-btn:hover {
-    background-color: #6a6ad4;
+    background-color: #388E3C;
 }
 
-/* --- タイトル画面用のスタイルここから --- */
-.title-page {
-    margin: 0;
-    height: 100vh; /* 画面全体の高さに */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('C:\Users\iniad\Documents\Kanon\fitness-app\fitness-app\img\background.jpg'); /* 用意した画像パス */
-    background-size: cover; /* 画面全体に画像を広げる */
-    background-position: center;
-    color: white; /* 文字色を白に */
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* 文字に影をつけて読みやすく */
-    cursor: pointer; /* タップ可能であることを示すカーソル */
-    flex-direction: column; /* 縦方向に要素を並べる */
+/* ご褒美の文字を中央に配置するためのスタイル */
+.stamp-cell.achieved .stamp-number {
+    display: none;
 }
-
-.title-container {
-    text-align: center;
-}
-
-.date-text {
-    font-size: 1.5em; /* 日付のサイズ */
-    margin-bottom: 10px;
-}
-
-.fitness-title {
-    font-size: 4em; /* FITNESSの文字サイズ */
-    margin: 0;
-    letter-spacing: 5px; /* 文字間隔 */
-}
-
-.tap-message {
+.stamp-cell.achieved .stamp-label {
     font-size: 1.2em;
-    margin-top: 30px;
-    animation: blink 1.5s infinite; /* 点滅アニメーション */
 }
-
-@keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 1; }
-}
-/* --- タイトル画面用のスタイルここまで --- */

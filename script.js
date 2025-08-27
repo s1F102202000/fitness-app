@@ -2,36 +2,52 @@
 const titleScreen = document.getElementById('title-screen');
 const currentDateDisplay = document.getElementById('current-date');
 
-if (titleScreen) { // タイトル画面が存在する場合のみ実行
-    // 現在の日付を表示 (例: 2023年10月26日 木曜日)
+if (titleScreen) {
     const date = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
     currentDateDisplay.textContent = date.toLocaleDateString('ja-JP', options);
 
-    // 画面タップでメインページへ遷移
     titleScreen.addEventListener('click', () => {
-        window.location.href = 'main.html'; // main.htmlへ移動
+        window.location.href = 'main.html';
     });
 }
 
-
-// --- メイン画面の処理（既存のコードを維持しつつ、必要に応じて変更） ---
-// HTML要素の取得
+// --- メイン画面の処理 ---
 const pointDisplay = document.getElementById('point-display');
 const addButton = document.getElementById('add-point-btn');
+const stampGrid = document.getElementById('stamp-grid');
 
-// main.htmlが存在する場合のみ実行
-if (pointDisplay && addButton) {
-    // ご褒美の目標ポイントと要素を配列で管理
-    const rewards = [
-        { id: 1, target: 5 },
-        { id: 2, target: 10 },
-        { id: 3, target: 25 }
-    ];
-
+if (stampGrid) {
     let points = 0;
+    const TOTAL_STAMPS = 30;
+    const REWARD_STAMPS = [7, 15, 30]; // ご褒美マスのポイント
 
-    // ポイントをローカルストレージから読み込む
+    // ページの初期化
+    function initializeStamps() {
+        for (let i = 1; i <= TOTAL_STAMPS; i++) {
+            const cell = document.createElement('div');
+            cell.classList.add('stamp-cell');
+            cell.id = `stamp-cell-${i}`;
+
+            const numberSpan = document.createElement('span');
+            numberSpan.classList.add('stamp-number');
+            numberSpan.textContent = i;
+            cell.appendChild(numberSpan);
+
+            // ご褒美マスに特別なクラスを付与
+            if (REWARD_STAMPS.includes(i)) {
+                cell.classList.add('reward-stamp');
+                const label = document.createElement('span');
+                label.classList.add('stamp-label');
+                label.textContent = 'ご褒美';
+                cell.appendChild(label);
+            }
+
+            stampGrid.appendChild(cell);
+        }
+    }
+
+    // ローカルストレージからポイントを読み込む
     function loadPoints() {
         const savedPoints = localStorage.getItem('fitnessPoints');
         if (savedPoints !== null) {
@@ -39,45 +55,38 @@ if (pointDisplay && addButton) {
         }
     }
 
-    // ポイントをローカルストレージに保存する
+    // ローカルストレージにポイントを保存
     function savePoints() {
         localStorage.setItem('fitnessPoints', points);
     }
 
-    // 画面表示を更新する関数
+    // 画面表示を更新
     function updateUI() {
         pointDisplay.textContent = points;
-        rewards.forEach(reward => {
-            const progressBar = document.getElementById(`progress-${reward.id}`);
-            const progressText = document.getElementById(`progress-text-${reward.id}`);
-            const rewardItem = document.getElementById(`reward-${reward.id}`);
-
-            if (progressBar && progressText && rewardItem) { // 要素が存在するか確認
-                // ゲージの幅を計算
-                const progressPercentage = Math.min((points / reward.target) * 100, 100);
-                progressBar.style.width = `${progressPercentage}%`;
-
-                // 進捗テキストを更新
-                progressText.textContent = `${Math.min(points, reward.target)} / ${reward.target} P`;
-
-                // 達成状況に応じてクラスを付与
-                if (points >= reward.target) {
-                    rewardItem.classList.add('achieved');
-                } else {
-                    rewardItem.classList.remove('achieved');
+        for (let i = 1; i <= TOTAL_STAMPS; i++) {
+            const cell = document.getElementById(`stamp-cell-${i}`);
+            if (i <= points) {
+                cell.classList.add('stamped');
+                if (REWARD_STAMPS.includes(i)) {
+                    cell.classList.add('achieved');
                 }
+            } else {
+                cell.classList.remove('stamped', 'achieved');
             }
-        });
+        }
     }
 
     // ボタンクリック時の処理
     addButton.addEventListener('click', () => {
-        points++;
-        updateUI();
-        savePoints();
+        if (points < TOTAL_STAMPS) {
+            points++;
+            updateUI();
+            savePoints();
+        }
     });
 
     // ページ読み込み時に実行
+    initializeStamps();
     loadPoints();
     updateUI();
 }
