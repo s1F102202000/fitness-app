@@ -81,6 +81,7 @@ body.main-page {
 }
 
 .stamp-cell.achieved {
+    
     background-color: #FFC107;
     border-color: #FF8F00;
     color: rgb(255, 255, 255);
@@ -106,18 +107,23 @@ body.main-page {
     color: #666;
 }
 
+/* ご褒美の文字のスタイル */
 .stamp-label {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 0.7em;
-    line-height: 1.2;
+    font-size: 0.65em; /* フォントサイズを少し小さくする */
+    line-height: 1.1; /* 行の高さを調整して詰める */
     text-align: center;
-    padding: 2px;
+    padding: 0px 2px; /* 左右のパディングを微調整 */
     box-sizing: border-box;
-    max-width: 90%;
+    max-width: 95%; /* マス目内の最大幅を広げる */
+    color: rgb(0, 0, 0); /* ご褒美マスに合わせて文字色を白に */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* 影を追加して見やすくする */
     z-index: 3; /* 一番手前に表示 */
+    /* white-space: normal; */ /* 必要であれば、自動改行を許可 */
+    /* word-break: break-all; */ /* 必要であれば、長い単語の途中でも改行を許可 */
 }
 
 .controls {
