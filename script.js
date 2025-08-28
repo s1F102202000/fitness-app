@@ -66,19 +66,34 @@ if (stampGrid) {
         pointDisplay.textContent = points;
         for (let i = 1; i <= TOTAL_STAMPS; i++) {
             const cell = document.getElementById(`stamp-cell-${i}`);
-            if (cell) { // nullチェックを追加
-                if (i <= points) {
-                    cell.classList.add('stamped');
-                } else {
-                    cell.classList.remove('stamped');
-                }
+            if (!cell) continue;
 
-                const isRewardStamp = REWARDS.some(r => r.stamp === i);
-                if (isRewardStamp && i <= points) {
-                    cell.classList.add('achieved');
-                } else {
-                    cell.classList.remove('achieved');
+            const isStamped = i <= points;
+            const isRewardStamp = REWARDS.some(r => r.stamp === i);
+
+            // スタンプの表示/非表示を切り替え (<img>タグを挿入)
+            if (isStamped && !isRewardStamp) {
+                if (!cell.querySelector('.stamp-image')) {
+                    const img = document.createElement('img');
+                    img.src = 'img/kin_tore.png'; // ここにあなたの画像ファイルパスを指定してください
+                    img.alt = '筋トレスタンプ';
+                    img.classList.add('stamp-image');
+                    cell.appendChild(img);
                 }
+                cell.classList.add('stamped');
+            } else {
+                const img = cell.querySelector('.stamp-image');
+                if (img) {
+                    img.remove();
+                }
+                cell.classList.remove('stamped');
+            }
+            
+            // ご褒美マスのスタイルを切り替え
+            if (isRewardStamp && isStamped) {
+                cell.classList.add('achieved');
+            } else {
+                cell.classList.remove('achieved');
             }
         }
     }

@@ -19,13 +19,11 @@
     background-position: center;
 }
 /* --- メインページ用のスタイル --- */
-/* --- メインページ用のスタイル --- */
 body.main-page {
-    background-image: url('img/background.jpg'); /* 背景画像 */
+    background-image: url('img/background.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* 画面に背景を固定 */
-    color: #333;
+    background-attachment: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,7 +33,7 @@ body.main-page {
 }
 
 .header {
-    background-color: rgba(140, 204, 97, 0.8);
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 15px 30px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -60,34 +58,39 @@ body.main-page {
     padding-top: 100%;
     position: relative;
     border-radius: 8px;
-    background-color: #e6ffe6; /* 薄い黄緑 */
+    background-color: #e6ffe6;
     border: 2px solid #a6e3a6;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2em;
     font-weight: bold;
-    color: #000000; /* 濃い緑 */
+    color: #4CAF50;
     box-sizing: border-box;
     transition: background-color 0.3s ease;
 }
 
-/* スタンプが押されたマス目のスタイル */
 .stamp-cell.stamped {
-    background-image: url('img/dumbbell.svg'); /* 筋トレマークを表示 */
-    background-size: 60%; /* サイズ調整 */
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: #c8e6c9; /* スタンプが押されたマス目の背景色を少し変える */
+    background-color: #c8e6c9;
+    /* 拡大効果を無効化 */
+    transform: none;
+    -webkit-transform: none;
 }
 
-/* ご褒美マスが達成されたときのスタイル */
 .stamp-cell.achieved {
-    background-color: #FFC107; /* ご褒美マスは金色に */
+    background-color: #FFC107;
     border-color: #FF8F00;
     color: white;
     box-shadow: 0 0 10px #FFC107;
-    background-image: none; /* ご褒美マスにはダンベルマークを表示しない */
+}
+
+.stamp-image {
+    width: 60%;
+    height: 60%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .stamp-number {
@@ -98,18 +101,17 @@ body.main-page {
     color: #666;
 }
 
-/* ご褒美の文字のスタイル */
 .stamp-label {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 0.7em; /* フォントサイズを小さくしてマスに収まるように */
+    font-size: 0.7em;
     line-height: 1.2;
     text-align: center;
-    padding: 2px; /* パディングを減らす */
+    padding: 2px;
     box-sizing: border-box;
-    max-width: 90%; /* マスの中に収まるように最大幅を設定 */
+    max-width: 90%;
 }
 
 .controls {
@@ -148,14 +150,4 @@ body.main-page {
 
 #reset-btn:hover {
     background-color: #e0e0e0;
-}
-
-/* タップメッセージの点滅アニメーション */
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.2; }
-}
-
-.tap-message {
-    animation: blink 1.5s infinite;
 }
