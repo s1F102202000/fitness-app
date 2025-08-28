@@ -20,11 +20,12 @@ const resetButton = document.getElementById('reset-btn');
 
 if (stampGrid) {
     let points = 0;
+    let stampDates = []; // スタンプの日付を保存する配列
     const TOTAL_STAMPS = 30;
     const REWARDS = [
-        { stamp: 7, name: 'ガチャガチャ' },
-        { stamp: 15, name: 'ガチャガチャ&アイス' },
-        { stamp: 30, name: '焼肉!!' }
+        { stamp: 7, name: 'カフェで休憩' },
+        { stamp: 15, name: '映画を見る' },
+        { stamp: 30, name: '新しい服' }
     ];
 
     function initializeStamps() {
@@ -46,6 +47,11 @@ if (stampGrid) {
                 label.textContent = reward.name;
                 cell.appendChild(label);
             }
+            
+            // 日付表示用の要素を追加
+            const dateSpan = document.createElement('span');
+            dateSpan.classList.add('stamp-date');
+            cell.appendChild(dateSpan);
 
             stampGrid.appendChild(cell);
         }
@@ -56,10 +62,17 @@ if (stampGrid) {
         if (savedPoints !== null) {
             points = parseInt(savedPoints);
         }
+        // 日付のデータを読み込む
+        const savedDates = localStorage.getItem('stampDates');
+        if (savedDates !== null) {
+            stampDates = JSON.parse(savedDates);
+        }
     }
 
     function savePoints() {
         localStorage.setItem('fitnessPoints', points);
+        // 日付のデータを保存する
+        localStorage.setItem('stampDates', JSON.stringify(stampDates));
     }
 
     function updateUI() {
@@ -71,6 +84,7 @@ if (stampGrid) {
             const isStamped = i <= points;
             const isRewardStamp = REWARDS.some(r => r.stamp === i);
 
+            // 筋トレマークの表示・非表示
             if (isStamped) {
                 if (!cell.querySelector('.stamp-image')) {
                     const img = document.createElement('img');
@@ -87,7 +101,19 @@ if (stampGrid) {
                 }
                 cell.classList.remove('stamped');
             }
+
+            // 日付の表示・非表示
+            const dateSpan = cell.querySelector('.stamp-date');
+            if (isStamped && stampDates[i-1]) {
+                const date = new Date(stampDates[i-1]);
+                const month = date.getMonth() + 1;
+                const day = date.getDate();
+                dateSpan.textContent = `${month}/${day}`;
+            } else {
+                dateSpan.textContent = ''; // 日付を消去
+            }
             
+            // ご褒美マスのスタイルを適用
             if (isRewardStamp && isStamped) {
                 cell.classList.add('achieved');
             } else {
@@ -101,6 +127,7 @@ if (stampGrid) {
             const confirmReset = window.confirm('本当にスタンプを初期化しますか？この操作は元に戻せません。');
             if (confirmReset) {
                 points = 0;
+                stampDates = []; // 日付の配列も初期化
                 savePoints();
                 updateUI();
                 alert('スタンプを初期化しました。');
@@ -112,17 +139,15 @@ if (stampGrid) {
     addButton.addEventListener('click', () => {
         if (points < TOTAL_STAMPS) {
             points++;
+            stampDates[points-1] = new Date().toISOString(); // 現在の日付を保存
             updateUI();
             savePoints();
 
-            // 新しくスタンプが押されたマス目の要素を取得
             const newStampCell = document.getElementById(`stamp-cell-${points}`);
             if (newStampCell) {
                 const stampImage = newStampCell.querySelector('.stamp-image');
                 if (stampImage) {
-                    // アニメーションをトリガーする
                     stampImage.classList.add('animate');
-                    // アニメーションが終わったらクラスを削除 (再度アニメーションできるように)
                     stampImage.addEventListener('animationend', () => {
                         stampImage.classList.remove('animate');
                     }, { once: true });

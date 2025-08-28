@@ -200,3 +200,15 @@ body.main-page {
 .stamp-image.animate {
     animation: stamp-bounce 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
+
+/* 日付の文字のスタイル */
+.stamp-date {
+    position: absolute;
+    bottom: 5px; /* マス目の下から5pxの位置に配置 */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6em; /* 小さめのフォントサイズ */
+    color: #000000;
+    text-align: center;
+    width: 100%;
+}
