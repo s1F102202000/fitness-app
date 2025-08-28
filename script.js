@@ -22,9 +22,9 @@ if (stampGrid) {
     let points = 0;
     const TOTAL_STAMPS = 30;
     const REWARDS = [
-        { stamp: 7, name: 'カフェで休憩' },
-        { stamp: 15, name: '映画を見る' },
-        { stamp: 30, name: '新しい服' }
+        { stamp: 7, name: 'ガチャガチャ' },
+        { stamp: 15, name: 'ガチャガチャ&アイス' },
+        { stamp: 30, name: '焼肉!!' }
     ];
 
     function initializeStamps() {
