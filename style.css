@@ -82,6 +82,7 @@ body.main-page {
     border-color: #FF8F00;
     color: white;
     box-shadow: 0 0 10px #FFC107;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5); /* 影を追加して見やすくする */
 }
 
 .stamp-image {
@@ -91,6 +92,7 @@ body.main-page {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1; /* ご褒美文字より下に表示 */
 }
 
 .stamp-number {
@@ -112,6 +114,7 @@ body.main-page {
     padding: 2px;
     box-sizing: border-box;
     max-width: 90%;
+    z-index: 3; /* 一番手前に表示 */
 }
 
 .controls {
@@ -150,4 +153,47 @@ body.main-page {
 
 #reset-btn:hover {
     background-color: #e0e0e0;
+}
+
+/* --- アニメーション用のスタイルここから --- */
+.confetti {
+    position: absolute;
+    width: 8px; /* 紙吹雪のサイズ */
+    height: 8px;
+    background-color: #ffd700; /* デフォルトの色 (金色) */
+    opacity: 0;
+    border-radius: 50%; /* 丸い紙吹雪にする */
+    animation: confetti-fall 1s forwards; /* アニメーション適用 */
+    pointer-events: none; /* クリックイベントをブロックしないようにする */
+    z-index: 10; /* 他の要素より手前に表示 */
+}
+
+/* 紙吹雪の色のバリエーション */
+.confetti.color-1 { background-color: #ff69b4; /* ピンク */ }
+.confetti.color-2 { background-color: #00bfff; /* 水色 */ }
+.confetti.color-3 { background-color: #90ee90; /* 薄緑 */ }
+
+/* 紙吹雪が落ちるアニメーション */
+@keyframes confetti-fall {
+    0% {
+        transform: translate(0, 0) rotateZ(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y)) rotateZ(var(--deg)); /* x, y, 回転角度をJSから設定 */
+        opacity: 0;
+    }
+}
+/* --- アニメーション用のスタイルここまで --- */
+
+/* 新しいアニメーションのスタイルを追加 */
+@keyframes stamp-bounce {
+    0% { transform: scale(0.5); opacity: 0; } /* 開始：小さくて透明 */
+    50% { transform: scale(2.0); opacity: 1; } /* 中間：少し大きく */
+    100% { transform: scale(1.0); opacity: 1; } /* 終了：元のサイズに戻る */
+}
+
+/* 筋トレマークにアニメーションを適用 */
+.stamp-image.animate {
+    animation: stamp-bounce 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }

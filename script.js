@@ -22,9 +22,9 @@ if (stampGrid) {
     let points = 0;
     const TOTAL_STAMPS = 30;
     const REWARDS = [
-        { stamp: 7, name: 'ガチャガチャ!' },
-        { stamp: 15, name: 'ガチャガチャ&アイス!' },
-        { stamp: 30, name: '焼肉!!' }
+        { stamp: 7, name: 'カフェで休憩' },
+        { stamp: 15, name: '映画を見る' },
+        { stamp: 30, name: '新しい服' }
     ];
 
     function initializeStamps() {
@@ -71,11 +71,10 @@ if (stampGrid) {
             const isStamped = i <= points;
             const isRewardStamp = REWARDS.some(r => r.stamp === i);
 
-            // スタンプの表示/非表示を切り替え (<img>タグを挿入)
-            if (isStamped && !isRewardStamp) {
+            if (isStamped) {
                 if (!cell.querySelector('.stamp-image')) {
                     const img = document.createElement('img');
-                    img.src = 'img/kin_tore.png'; // ここにあなたの画像ファイルパスを指定してください
+                    img.src = 'img/kin_tore.png';
                     img.alt = '筋トレスタンプ';
                     img.classList.add('stamp-image');
                     cell.appendChild(img);
@@ -89,7 +88,6 @@ if (stampGrid) {
                 cell.classList.remove('stamped');
             }
             
-            // ご褒美マスのスタイルを切り替え
             if (isRewardStamp && isStamped) {
                 cell.classList.add('achieved');
             } else {
@@ -98,7 +96,6 @@ if (stampGrid) {
         }
     }
 
-    // スタンプ初期化ボタンクリック時の処理
     if (resetButton) {
         resetButton.addEventListener('click', () => {
             const confirmReset = window.confirm('本当にスタンプを初期化しますか？この操作は元に戻せません。');
@@ -117,6 +114,20 @@ if (stampGrid) {
             points++;
             updateUI();
             savePoints();
+
+            // 新しくスタンプが押されたマス目の要素を取得
+            const newStampCell = document.getElementById(`stamp-cell-${points}`);
+            if (newStampCell) {
+                const stampImage = newStampCell.querySelector('.stamp-image');
+                if (stampImage) {
+                    // アニメーションをトリガーする
+                    stampImage.classList.add('animate');
+                    // アニメーションが終わったらクラスを削除 (再度アニメーションできるように)
+                    stampImage.addEventListener('animationend', () => {
+                        stampImage.classList.remove('animate');
+                    }, { once: true });
+                }
+            }
         }
     });
 
