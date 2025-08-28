@@ -15,7 +15,7 @@
     cursor: pointer;
     flex-direction: column;
     /* 新しいグラデーションオーバーレイを追加 */
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('img/background.jpg');
+    background: linear-gradient(rgba(129, 165, 154, 0.4), rgba(90, 124, 113, 0.4)), url('img/background.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -67,13 +67,14 @@ body.main-page {
     align-items: center;
     font-size: 1.2em;
     font-weight: bold;
-    color: #4CAF50;
+    color: #323c96;
     box-sizing: border-box;
     transition: background-color 0.3s ease;
 }
 
 .stamp-cell.stamped {
-    background-color: #c8e6c9;
+    background-color: #fffc5c;
+    border: 2px solid #ffc118;
     /* 拡大効果を無効化 */
     transform: none;
     -webkit-transform: none;
@@ -82,9 +83,9 @@ body.main-page {
 .stamp-cell.achieved {
     background-color: #FFC107;
     border-color: #FF8F00;
-    color: white;
+    color: rgb(255, 255, 255);
     box-shadow: 0 0 10px #FFC107;
-    text-shadow: 2px 2px 2px rgba(0,0,0,0.5); /* 影を追加して見やすくする */
+    text-shadow: 5px 5px 5px rgba(1,1,1,1.5); /* 影を追加して見やすくする */
 }
 
 .stamp-image {
